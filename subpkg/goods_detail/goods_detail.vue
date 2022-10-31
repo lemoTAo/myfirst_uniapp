@@ -1,6 +1,6 @@
 <template>
 	<view>
-	购物车
+		hello
 	</view>
 </template>
 
@@ -10,6 +10,10 @@
 			return {
 				
 			};
+		},
+		onLoad(option) {
+			console.log(option)
+			
 		}
 	}
 </script>
