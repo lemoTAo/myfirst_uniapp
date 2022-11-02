@@ -1,5 +1,8 @@
 <template>
 	<view>
+		<view class="search-box">
+			<my_search @click="gotoSearch"></my_search>
+		</view>
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
 		<swiper-item v-for="list,index in swiperList" :key="index" >
 			<navigator class="swiper-item" :url="'/subpkg/goods_detail/goods_detail?goods_id='+list.goods_id">
@@ -89,6 +92,11 @@ import { $http } from '@escook/request-miniprogram';
 				uni.switchTab({
 					url:"/pages/cate/cate"
 				})
+			},//搜索页面
+			gotoSearch(){
+				uni.navigateTo({
+					url:'/subpkg/search/search'
+				})
 			}
 		}
 	    
@@ -131,5 +139,10 @@ swiper{
 		display: flex;
 		flex-wrap: wrap;
 	}
+}
+.search-box{
+	position:sticky;
+	top:0;
+	z-index: 999;
 }
 </style>

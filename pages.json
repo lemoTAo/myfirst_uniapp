@@ -40,8 +40,16 @@
 				}
 			    ,{
                     "path" : "goods_list/goods_list",
+                    "style" :  {
+                    }
+                
+                }
+                ,{
+                    "path" : "search/search",
                     "style" :                                                                                    
                 {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
                 }
                 
                 }
@@ -51,7 +59,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "商城",
-		"navigationBarBackgroundColor": "#bfd590",
+		"navigationBarBackgroundColor": "#c00000",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
 			"background": "#efeff4"

@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<my_search :bgc="'pink'" :radius="20" @click="gotoSearch"></my_search>
 		<view class="scroll-view-container">
 			<scroll-view class="scroll-view-left" scroll-y="true" :style="{height:windowHeight}">
 				<view :class="['scroll-view-left-item',index===chosed ? 'active':'' ]" 
@@ -63,6 +64,11 @@
 		onChangechosed(index){
 			this.chosed=index
 			this.CateList2=this.CateList[index].children
+		},
+		gotoSearch(){
+			uni.navigateTo({
+				url:'/subpkg/search/search'
+			})
 		}
 		
 		}
