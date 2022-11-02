@@ -99,6 +99,7 @@ import { $http } from '@escook/request-miniprogram';
 swiper{
 	height: 330rpx;
 	.swiper-item,image{
+		width: 100%;
 		height: 100%;
 	}
 }

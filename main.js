@@ -12,8 +12,14 @@ $http.beforeRequest = function (options) {
  	title:"加载中"
  })
 }
-$http.afterRequest = function () {
-  uni.hideLoading()
+$http.afterRequest = function (res) {
+	return new Promise((resolve,reject)=>{
+		      success:(res)=>{
+		        resolve(res);
+		      }
+		      
+             uni.hideLoading()
+	})
 }
 //封装uni.showToast
 uni.$showMsg=function(title='请求失败',duration=1500){
