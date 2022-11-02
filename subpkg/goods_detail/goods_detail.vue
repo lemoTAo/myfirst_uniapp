@@ -1,6 +1,9 @@
 <template>
 	<view>
-		hello
+		detail
+		<view class="">
+			<view class=""></view>
+		</view>
 	</view>
 </template>
 

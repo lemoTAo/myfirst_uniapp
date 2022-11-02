@@ -18,9 +18,9 @@
 					<view class="cate-lv2-title">/{{list.cat_name}}/</view>
 					<!-- 三级分类 -->
 					<view class="cate-lv3">
-						<view v-for="list2,index in list.children" :key="index" class="cate-lv3-item">
+						<view v-for="list2,index in list.children" :key="index" class="cate-lv3-item" @click="gotogoods_lists(list2.cat_id)">
 						   
-							<image :src="list2.cat_icon" ></image>
+							<image :src="list2.cat_icon.replace('dev','web')"  class="imagestyle"></image>
 							
 								<text>{{list2.cat_name}}</text>
 						</view>
@@ -52,7 +52,7 @@
 		methods:{
 			//获取分类数据
 		 async getCateList(){
-			const {data:res}= await uni.$http.get('/api/public/v1/categories')
+			let  {data:res}= await uni.$http.get('/api/public/v1/categories')
 			if(res.meta.status!==200){
 				return uni.$showMsg()
 			}
@@ -69,6 +69,11 @@
 			uni.navigateTo({
 				url:'/subpkg/search/search'
 			})
+		},
+		gotogoods_lists(id){
+			uni.navigateTo({
+				url:'/subpkg/goods_list/goods_list?id='+id
+			})
 		}
 		
 		}
@@ -79,7 +84,7 @@
 .scroll-view-container{
 	display: flex;
 	.scroll-view-left{
-		width: 240rpx;
+		width: 20%;
 		.scroll-view-left-item{
 			background-color: #f7f7f7;
 			line-height: 120rpx;
@@ -109,32 +114,38 @@
 		
 	}
 	.scroll-view-right{
+		width: 80%;
 		.cate-lv2{
 			.cate-lv2-title{
 		         font-size: 36rpx;
 		         font-weight: bold;
 		         text-align: center;
 		         padding: 30rpx 0;
-				 .cate-lv3{
-					  display: flex;
-					 .cate-lv3-item
-					 {  
-						 display: flex;
-						 justify-content: center;
-						 flex-direction:column;
-						 align-items: center;
-						 width: 33.3%;
-						 margin-bottom: 10px;
-						   image{
-							 width: 60px;
-							 height: 60px;
-						  }
-						  text{
-							  font-size: 12px;
-						  }
-					 }
-				 }
-	    }
+				
+	        }
+			.cate-lv3{
+				 display: flex;
+				 width: 100%;
+				 flex-wrap: wrap;
+				.cate-lv3-item
+				{  
+				  display: flex;
+				  justify-content: center;
+				  flex-direction:column;
+				  align-items: center;
+				  width: 33.3%;
+				  margin-bottom: 10px;
+				 
+				    .imagestyle{
+				    	 width: 60px;
+				    	 height: 60px;
+				      }
+				      text{
+				    	  font-size: 12px;
+				      }
+				}
+			}
+			
 		}
 		
 	}

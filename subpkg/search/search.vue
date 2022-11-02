@@ -8,7 +8,7 @@
 		<view  class="sugg-list" v-if="searchResult.length!=0">
 			<view class="sugg-item" v-for="list,index in searchResult" :key="index" @click="getoDetail(list.goods_id)">
 				<view class="goods-name">{{list.goods_name}}</view>
-				<uni-icons type="right" size="16"></uni-icons>
+				<uni-icons type="right" size="16" @click="clearResult"></uni-icons>
 			</view>
 		</view>
 		<!-- 搜索历史                        两者二选一-->
@@ -29,29 +29,34 @@
 	export default {
 		data() {
 			return {
-				timer:null,
+				timer:'',
 				kw:'',
 				searchResult:[],
 				history:['1','2','3']
 			};
 		},
         methods:{
+			clearResult(){
+				searchResult=[]
+			},
 			input(e){
+				
 			clearTimeout(this.timer)
-			const timer=setTimeout(()=>{
+			 this.timer=setTimeout(()=>{
 				this.kw=e
 				this.getSearchList()
-			},200)
+			},500)
 			},
-			getSearchList(){
+		    async	getSearchList(){
 				if(this.searchResult===0)
 				{
 					return ''
 				}
-				const {data:res}=uni.$http.get('/api/public/v1/goods/qsearch',{query:this.kw})
+				const {data:res}= await uni.$http.get('/api/public/v1/goods/qsearch',{query:this.kw})
+				console.log(res.meta.status)
 				if(res.meta.status!==200)
 				{
-					uni.$showMsg()
+					return  uni.$showMsg()
 				}
 				this.searchResult=res.message
 				this.sevehistoryList()
@@ -65,7 +70,7 @@
 				//unshift
 				// 因为历史记录每次要排在最前面，直接set达不到
 				//去除重置
-				const set=new Set(this.hishistory)
+				const set=new Set(this.history)
 				// 移除对应的元素
 				set.delete(this.kw)
 				//添加元素
@@ -76,8 +81,8 @@
 			},
 			clearHistory(){
 				//清空历史
-				uni.clearStorageSync('kw')
-				this.history=uni.getStorageSync('kw')
+				// uni.clearStorageSync('kw')
+				this.history=uni.setStorageSync('kw',[])
 			},
 			gotToGoodsListByhistory(kw){
 				uni.navigateTo({

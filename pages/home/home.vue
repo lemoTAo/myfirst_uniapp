@@ -85,7 +85,6 @@ import { $http } from '@escook/request-miniprogram';
 					})
 				})
 				this.floorList=res.message
-				console.log(this.navList)
 			},
 			navChange(e){
 				if(e==='分类')

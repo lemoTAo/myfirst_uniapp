@@ -15,8 +15,8 @@ $http.beforeRequest = function (options) {
 $http.afterRequest = function (res) {
 	return new Promise((resolve,reject)=>{
 		      success:(res)=>{
-		        resolve(res);
-		      }
+		        resolve( res );
+		      },
 		      
              uni.hideLoading()
 	})
@@ -29,23 +29,26 @@ uni.$showMsg=function(title='请求失败',duration=1500){
 		icon:'none'
 	})
 }
+// 引入store
+import store from'store/store.js'
 Vue.config.productionTip = false
 
 App.mpType = 'app'
 
 const app = new Vue({
-    ...App
+    ...App,
+	store
 })
 app.$mount()
 // #endif
 
-// #ifdef VUE3
-import { createSSRApp } from 'vue'
-import App from './App.vue'
-export function createApp() {
-  const app = createSSRApp(App)
-  return {
-    app
-  }
-}
-// #endif
+// // #ifdef VUE3
+// import { createSSRApp } from 'vue'
+// import App from './App.vue'
+// export function createApp() {
+//   const app = createSSRApp(App)
+//   return {
+//     app
+//   }
+// }
+// // #endif

@@ -41,6 +41,10 @@
 			    ,{
                     "path" : "goods_list/goods_list",
                     "style" :  {
+						 "enablePullDownRefresh": true,
+						 "onReachBottomDistance": 100
+						 
+						 
                     }
                 
                 }
